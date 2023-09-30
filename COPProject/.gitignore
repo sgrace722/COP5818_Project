@@ -1,0 +1,55 @@
+# Django generated files
+#db.sqlite3
+# **/migrations/
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Static and Media files (if not using a separate server or cloud storage)
+# static/
+# **/static/
+# media/
+# **/media/
+
+# Secrets and sensitive information
+.env
+secret_key.txt
+
+# IDE and text editor specific files
+.vscode/
+.idea/
+*~
+
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs and temporary files
+*.log
+*.swp
+
+# User-specific settings
+.vscode/settings.json
+.idea/workspace.xml
+.idea/misc.xml
+
+# Exclude development or local settings
+settings_dev.py
+
+# Django's __pycache__ directories
+__pycache__/
+
+# Django's *.log and *.pot files
+*.log
+*.pot
+
+# Test database files (if used)
+*.test_db
+
+# Dependency files (e.g., requirements.txt, Pipfile.lock)
+# Add these lines if you want to include them in version control
+# requirements.txt
+# Pipfile.lock
