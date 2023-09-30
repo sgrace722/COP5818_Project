@@ -1,6 +1,6 @@
 # Django generated files
 #db.sqlite3
-**/migrations/
+# **/migrations/
 
 # Virtual environment
 venv/
