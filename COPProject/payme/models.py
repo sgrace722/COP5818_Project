@@ -16,7 +16,7 @@ from django.contrib import auth
 
 class LOGIN(models.Model):
     user_name = models.CharField(
-        max_length=50, help_text="The users username to log into the site")
+        max_length=50, help_text="The users username to log into the site", unique=True)
     user_password = models.CharField(
         max_length=50, help_text="The users password to log into the site")
 
