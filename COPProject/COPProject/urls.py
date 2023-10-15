@@ -19,6 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', include('payme.urls')),  # Include your app's URLs here
     path('', include('payme.urls')),  # Define a root URL pattern
 ]
