@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import LOGIN
-from .forms import LoginForm
+from .forms import LoginForm, UrlForm
 # Create your views here.
 
 
@@ -21,9 +21,15 @@ def login_page(request):
 
 
 def url_page(request):
+    form = UrlForm()
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            dollar_amount = form.cleaned_data['dollar_amount']
+            return 
+    return render(request, "url_page.html", {"form": form} )
 
 
 
-    
 # referenced for additional help
 # https://openclassrooms.com/en/courses/7107341-intermediate-django/7263317-create-a-login-page-with-a-function-based-view

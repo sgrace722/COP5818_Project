@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL page</title>
+</head>
+<h1><span style="color: #008000;">Generator of Links to Payment</span></h1>
+<h2 style="color: #2e6c80;">Enter the total amount you want paid and a link will be generated</h2>
+<body>
+     <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Generate Link</button>
+     </form>
+</body>
+</html>
