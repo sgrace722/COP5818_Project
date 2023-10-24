@@ -26,7 +26,7 @@ def url_page(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             dollar_amount = form.cleaned_data['dollar_amount']
-            return 
+            return render(request, 'link_page.html')
     return render(request, "url_page.html", {"form": form} )
 
 
