@@ -1,6 +1,6 @@
 # Django generated files
 #db.sqlite3
-**/migrations/
+# **/migrations/
 
 # Virtual environment
 venv/
@@ -53,3 +53,6 @@ __pycache__/
 # Add these lines if you want to include them in version control
 # requirements.txt
 # Pipfile.lock
+
+# prevent environment files from being stored
+*.env
