@@ -19,5 +19,11 @@ def login_page(request):
                 form.add_error(None, 'Invalid Login credential')
     return render(request, "login_screen.html", { "form": form})
 
+
+def url_page(request):
+
+
+
+    
 # referenced for additional help
 # https://openclassrooms.com/en/courses/7107341-intermediate-django/7263317-create-a-login-page-with-a-function-based-view
