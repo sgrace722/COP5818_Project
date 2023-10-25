@@ -1,5 +1,5 @@
 """
-WSGI config for COPProject project.
+WSGI config for COP5818_project project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "COPProject.settings")
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'COP5818_project.settings')
 
 application = get_wsgi_application()
