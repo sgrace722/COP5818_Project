@@ -16,4 +16,5 @@ pip install python-decouple
 pip install django-allauth
 pip install django-crispy_forms
 pip install crispy-bootstrap4
+pip install Pillow
 ```
