@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import LoginForm
+from .forms import LoginForm, UrlForm
 from .models import UserProfile
 
 
@@ -9,6 +9,14 @@ def home(request):
 	# return render(request, 'all_users.html', {'users': users})
 	return render(request, 'index.html', {})
 
+def url_page(request):
+    form = UrlForm()
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            dollar_amount = form.cleaned_data['dollar_amount']
+            return render(request, 'link_page.html')
+    return render(request, "url_page.html", {"form": form} )
 
 # def login(request):
 # 	if request.method == 'POST':
