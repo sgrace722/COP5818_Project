@@ -20,7 +20,8 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-	path('accounts/', include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),
     path('home/', TemplateView.as_view(template_name='dashboard/home.html'), name='home'),
+    path('profile/', TemplateView.as_view(template_name='account/profile.html'), name='Profile'),
     path('', include('payme.urls')),  # Define a root URL pattern
 ]
