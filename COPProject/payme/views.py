@@ -14,6 +14,8 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
+import requests
+from decimal import Decimal
 
 def home(request):
 	# users = Users.objects.all()
@@ -53,13 +55,22 @@ def generate_url(request):
                 random_url = ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(6))
                 if not GenerateURL.objects.filter(random_url=random_url).exists():
                     break
+            
+			# Calculate the equivalent value in USD
+            # amount_usd = calculate_usd_equivalent(currency, amount)
+
             generated_url = GenerateURL.objects.create(user=request.user, random_url=random_url, amount=amount, currency=currency)
             return redirect(reverse('payme:generate_url'))  # Redirect to the 'generate_url' view
-
     else:
         form = GenerateForm()
-    return render(request, 'account/generate_url.html', {'form': form, 'user_links': user_links})
+        updated_user_links = []
 
+        for link in user_links:
+            # Calculate the equivalent value in USD for each row
+            link.amount_usd = calculate_usd_equivalent(link.currency, link.amount)
+            updated_user_links.append(link)
+
+        return render(request, 'account/generate_url.html', {'form': form, 'user_links': updated_user_links})
 
 
 @login_required
@@ -80,3 +91,35 @@ def process_url(request, random_url):
     # Redirect to the PayPal payment URL
     return HttpResponseRedirect(paypal_url)
     # return HttpResponse(f"Generated PayPal URL: <a href='{random_url}'>{random_url}</a>")
+
+def calculate_usd_equivalent(currency, amount):
+    print("calculate_usd_equivalent function is triggered")
+    if currency == 'USD':
+        return amount
+
+    # Replace 'YOUR_API_KEY' with your actual API key from Free Currency API
+    api_key = 'fca_live_KXdBZLfQrARvORwspxdSwiFC3SzOrnmR0eUMkoXT'  # Get your API key from https://app.freecurrencyapi.com
+
+    # Make an API request to get the latest exchange rates
+    api_url = f'https://api.freecurrencyapi.com/v1/latest'
+    params = {'apikey': api_key}
+    response = requests.get(api_url, params=params)
+
+    if response.status_code == 200:
+        data = response.json()
+        exchange_rate = data["data"][currency]  # Get the exchange rate for USD
+
+        # Convert amount to Decimal and calculate the equivalent value in USD
+        amount = Decimal(amount)
+        amount_usd = amount / Decimal(exchange_rate)
+        
+		# Round the result to 2 decimal places
+        # getcontext().prec = 3  # Set the precision (total number of significant digits)
+        amount_usd = amount_usd.quantize(Decimal('0.00'), rounding='ROUND_DOWN')
+
+        print(f"Result: {amount_usd}")
+        return amount_usd
+    else:
+        # Unable to retrieve exchange rates, return the original amount or handle the error as needed
+        print(f"Failed to get data.")
+        return amount
