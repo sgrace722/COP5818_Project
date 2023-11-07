@@ -7,7 +7,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 	# Paypal Data
-    paypalemail = models.CharField(max_length=255, blank=True, null=True)
+    paypalemail = models.EmailField(max_length=255, blank=True, null=True)
 
     # Additional fields here
     bio = models.TextField(blank=True)
