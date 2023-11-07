@@ -12,7 +12,8 @@ urlpatterns = [
 	# path('profile/', profile, name='profile'),
     path('profile/', views.profile, name='profile'),
 	path('generate/', views.generate_url, name='generate_url'),
-    path('<str:random_url>/', views.generate_url, name='generate_url'),
+    # path('<str:random_url>/', views.generate_url, name='generate_url'),
 	path('delete/<int:pk>/', views.delete_link, name='delete_link'),
+	path('<str:random_url>/', views.process_url, name='process_url'),
     # Add more URL patterns as necessary
 ]

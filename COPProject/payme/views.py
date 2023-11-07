@@ -12,7 +12,8 @@ from .forms import GenerateForm
 from .models import GenerateURL
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
-
+from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 
 def home(request):
 	# users = Users.objects.all()
@@ -67,3 +68,15 @@ def delete_link(request, pk):
     if link.user == request.user:
         link.delete()
     return redirect('payme:generate_url')
+
+
+def process_url(request, random_url):
+    # Look up the GenerateURL object based on the random_url
+    generate_url = get_object_or_404(GenerateURL, random_url=random_url)
+
+    # Construct the PayPal payment URL
+    paypal_url = f"https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business={generate_url.user.userprofile.paypalemail}&amount={generate_url.amount}&currency_code={generate_url.currency}"
+
+    # Redirect to the PayPal payment URL
+    return HttpResponseRedirect(paypal_url)
+    # return HttpResponse(f"Generated PayPal URL: <a href='{random_url}'>{random_url}</a>")
