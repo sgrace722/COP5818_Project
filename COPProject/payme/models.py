@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -17,6 +18,16 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+
+class GenerateURL(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    random_url = models.CharField(max_length=6, unique=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    currency = models.CharField(max_length=3, default='USD')
+
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
