@@ -1,0 +1,48 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+	<div class="text-center">
+		<h2>Generate URL</h2>
+		<form method="post">
+			{% csrf_token %}
+			<div class="form-group">
+				{{ form.amount.label_tag }}
+				{{ form.amount }}
+			</div>
+			<div class="form-group">
+				{{ form.currency.label_tag }}
+				{{ form.currency }}
+			</div>
+			<button type="submit" class="btn btn-primary" style="margin-top: 10px;">Generate</button>
+		</form>
+	</div>
+
+	<hr>  <!-- Add a horizontal rule for separation -->
+
+	<div class="center-content">
+		<h2>Your Generated Links</h2>
+		<table class="table" style="max-width: 50%; min-width: 500px; margin: 0 auto;">
+			<thead>
+				<tr>
+					<th>Random URL</th>
+					<th>Amount</th>
+					<th>Currency</th>
+					<th>Amount in USD</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for link in user_links %}
+					<tr>
+						<!-- <td>{{ link.random_url }}</td> -->
+						<td><a href="{% url 'payme:process_url' random_url=link.random_url %}" target="_blank">http://localhost:8080/{{ link.random_url }}</a></td>
+						<td>${{ link.amount|floatformat:"2" }}</td>
+						<td>{{ link.currency }}</td>
+						<td>${{ link.amount_usd|floatformat:"2" }}</td> <!-- Display the equivalent value in USD -->
+						<td><a href="{% url 'payme:delete_link' link.pk %}">Delete</a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

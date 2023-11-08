@@ -7,6 +7,10 @@
       .form-group {
         margin-top: 10px;
       }
+      .center-content {
+          text-align: center; /* Center the content horizontally */
+          margin: 0 auto; /* Center the container within the parent element */
+      }
     </style>
     {% block extra_head %}
     {% endblock %}
@@ -27,6 +31,8 @@
           {% if user.is_authenticated %}
           <div><a class="text-light" href="{% url 'account_email' %}">Change E-mail</a></div>
           <div><a class="text-light" href="{% url 'home' %}">Home</a></div>
+          <div><a class="text-light" href="{% url 'payme:profile' %}">Profile</a></div>
+          <div><a class="text-light" href="{% url 'payme:generate_url' %}">Payme Links</a></div>
           <div><a class="text-light" href="{% url 'account_logout' %}">Sign Out</a></div>
           {% else %}
           <div><a class="text-light" href="{% url 'account_login' %}">Sign In</a></div>
