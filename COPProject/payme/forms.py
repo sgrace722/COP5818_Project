@@ -9,7 +9,7 @@ class LoginForm(forms.Form):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['paypalemail', 'bio', 'profile_picture']  # Include additional fields as needed
+        fields = ['paypalemail', 'bio']  # Include additional fields as needed
 
 CURRENCY_CHOICES = (
     ('USD', 'USD'),
