@@ -1,9 +1,9 @@
 # COP5818_Project
-Host repository for our final project
+This is the primary repository for our final project
 
-The idea is to allow someone to be able to log into our site, and then type a whole dollar amount, like $50 or something. Then generate a special link that is tracked to their account via database. They can then give that link out to someone, and they don't have to log into our site to see the page. On the page they will see a pay now for $50 in this case. And will have a paypal button that uses paypal payments to perform the transaction.
+The idea is to allow someone to be able to log into our site, and then type a whole dollar amount, like $50 or something. Then generate a special link that is tracked to their account via database. They can then give that link out to someone, and they don't have to log into our site to see the page. On the page they will see a pay now for $50 in this case. And will have a paypal page that will process the payment if the user wishes to complete perform the transaction.
 
-It's an extremely simple webpage, but it covers every single requirement for the assignment, and it's something that we feel is do-able by us within the limited time frame.
+It's an extremely simple site, but it covers every single requirement for the assignment, and it's something that we feel is do-able by us within the limited time frame.
 
 ## Installs Required:
 
@@ -40,4 +40,14 @@ Updating the requirements file can be done via the command done within the root 
 pip freeze > requirements.txt
 ```
 
-Source: [More Info](https://stackoverflow.com/questions/18966564/pip-freeze-vs-pip-list)
+[More Info](https://stackoverflow.com/questions/18966564/pip-freeze-vs-pip-list)
+
+
+### **Important Note 3**
+
+The API key is for currency conversion is left within the repo, this was done on purpose. It's free and limited to 10k / month.
+In the real world, the API key would be hooked via an .env file.
+
+In fact, we easily could using the `python-decouple` library ([More Info](https://pypi.org/project/python-decouple/#usage))
+
+For the sake of ease, and clarity of what exactly the code is doing and to avoid any confusion regarding where the API key came from, and adding extra steps to setting up the project, it was left hardcoded in.
