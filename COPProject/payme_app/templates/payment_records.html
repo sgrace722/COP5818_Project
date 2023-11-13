@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Records</title>
+</head>
+<body>
+    <h1>Payment Records</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Generate Link">
+    </form>
+    <h2>Your Generated Links</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in payment_records %}
+                <tr>
+                    <td>${{ record.amount }}</td>
+                    <td><a href="/{{% url 'payment_record_view' record.url %}}" target="_blank">{{ record.url }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
